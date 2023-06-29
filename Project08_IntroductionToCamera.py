@@ -1,76 +1,59 @@
-# Project 8
-# Trying out the Pi Camera and learning about the different image settings
-# Build the the Project 8 circuit and experiment with the camera in cool ways
-
-#Challenge 1
-# Try changing the camera resolution to the minimum with 64, 64 and see how it looks
-
-#Challenge 2
-# Try changing the camera resolution the maximum with 2592, 1944 and
-# the framerate to 15 and see how it looks
-
-#Challege 3
-# Try changing the camera rotation to flip it upside down (0) or left or right (90, 270)
-
-#Challenge 4
-# Try adding a text on top of the image and changing the colors and size
-
-#Challenge 5
-# Try looping through all the contrast and brightness options
-# and annotate the image with their current levels
-
-#Challenge 6
-# Try looping through all the IMAGE_EFFECTS, EXPOSURE_MODES, and AWB_MODES options
-# and annotate the image with their current levels
-
-#Importing libraries
-# Here we want sleep for timing and picamera for the Pi's camera
-from picamera import PiCamera, Color
-from time import sleep
-
-# Setting up the camera
-camera = PiCamera()
-# Change the number of pixels and clarity of the camera
-# For challenge 1 and 2, see what low and high resolution look like
-camera.resolution = (640, 480)
-# Change the rate at which the camera records images
-camera.framerate = 30
-# Rotate the image by x degrees
-# Note that the camera assembly is upside down so 180 is right side up
-
-# For challenge 3, try other rotation angles
-camera.rotation = 180
-
-# For challenge 4, try annotating the image
-# Add text on top of the image
-camera.annotate_text = 'Hello World!'
-# Change the text size on top of the image between 6 and 160
-camera.annotate_text_size = 50
-# Change the text color in front and back
-camera.annotate_foreground = Color('red')
-camera.annotate_background = Color('blue')
-# Change the contrast between 0 and 100 (color/luminence difference between objects)
-camera.contrast = 75
-# Change the brightness of the image between 0 and 100
-camera.brightness = 75
-# Start the preview to view the camera image stream
-camera.start_preview()
-sleep(5)
-camera.stop_preview()
-
-# For challenge 5, try iterating through the brightness levels instead of contrast
-camera.start_preview()
-for i in range(100):
-camera.contrast = i
-camera.annotate_text = '%s' %i
-sleep(0.1)
-camera.stop_preview()
-
-# For challenge 6, try iterating through IMAGE_EFFECTS, EXPOSURE_MODES, and AWB_MODES
-camera.start_preview()
-for effect in camera.IMAGE_EFFECTS:
-camera.annotate_text = '%s' %effect
-camera.image_effect = effect
-sleep(1)
-camera.stop_preview()
+# Proyecto 08 
+# Probando la cámara del Pi y aprender sobre las diferentes configuraciones de imagen # Construya el Proyecto 8 circuito y experimenta con la cámara
+#Desafío 1 
+# Trate de cambiar la resolución de la cámara al mínimo 64, 64 y vea cómo se ve la  imagen 
+#Desafío 2 
+# Trate de cambiar la resolución de la cámara al máximo 2592, 1944 y # el framerate a 15 y vea cómo se ve la imagen 
+#Desafío 3 
+# Trate de cambiar la rotación de la cámara para darle la vuelta (0) o izquierda o derecha (90, 2 70) 
+#Desafío 4 
+# Trate de agregar un texto en la parte superior de la imagen y cambia los colores y el tamaño 
+#Desafío 5 
+# Trate de ver todas las opciones de contraste y luminosidad
+# y anotar la imagen con sus niveles actuales 
+#Desafío 6 
+# Haga el looping de todas las opctiones IMAGE_EFFECTS, EXPOSURE_MODES, y AWB_MODES # y anote la imagen con sus niveles actuales 
+#Importing libraries 
+# Aquí queremos sleep para el información de tiempo para la cámara del Pi from picamera import PiCamera, Color 
+from time import sleep 
+# Configuración de la cámara 
+camera = PiCamera() 
+# Cambiar el número de píxeles y la claridad de la cámara 
+# Para desafío 1 y 2, vea cómo se ve la baja y la alta resolución camera.resolution = (2592, 1944) 
+# Cambie la velocidad en que la cámara graba imágenes 
+camera.framerate = 15 
+# Rotar la imagen por x grados 
+# Anote que la cámara está boca abajo, por que 180 grados es el lado derecho 
+# Para desafío 3, prueba otros ángulos de rotación 
+camera.rotation = 270
+Copyright © Deloitte Development LLC 2022. All Rights Reserved. Developed in collaboration with the National Math + Science Initiative. 
+# Para desafío 4, intenta anotar la imagen 
+# Agregar texto encima de la imagen
+camera.annotate_text = 'Hello World!' 
+# Cambie el tamaño del texto en la parte superior de la imagen entre 6 y 160 
+camera.annotate_text_size = 50 
+# Cambie el color del texto de delante y de detrás 
+camera.annotate_foreground = Color('red') 
+camera.annotate_background = Color('blue') 
+# Cambie el contraste entre 0 y 100
+camera.contrast = 75 
+# Cambie el luminosidad de la imagen entre 0 y 100
+camera.brightness = 75 
+# Para ver el flujo de imágenes de la cámara 
+camera.start_preview() 
+sleep(5) 
+camera.stop_preview() 
+# Para desafío 5, trate de iterar por los niveles de luminosidad en lugar de contraste camera.start_preview() 
+for i in range(100): 
+ camera.brightness = i 
+ camera.annotate_text = '%s' %i 
+ sleep(0.1) 
+camera.stop_preview() 
+# Para desafío 6, trate de iterar por IMAGE_EFFECTS, EXPOSURE_MODES, y AWB_MODES 
+camera.start_preview() 
+for effect in camera.EXPOSURE_MODES: 
+ camera.annotate_text = '%s' %effect 
+ camera.exposure_mode = effect 
+ sleep(1) 
+camera.stop_preview() 
 camera.close()
