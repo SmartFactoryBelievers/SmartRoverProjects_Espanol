@@ -1,98 +1,77 @@
-# Project 5
-# Learning to program, writing functions, using motor control outputs, adding callback function
-# Build the the Project 5 circuit and drive the rover through button pushes, Simon Says style
-# Press and hold the button to drive for that duration
-
-#Challenge 1
-# Try changing the drive functions to switch the driving directions
-
-#Challenge 2
-# Add new drive functions to activate in the loop to create a new path
-
-#Challege 3
-# Use the modulo opertor to change the driving directions based on even or odd numbered presses
-
-#Challege 4
-# With the modulo, add new dirivng functions for even or odd numbered presses
-
-#Importing libraries
-# Here we want the sleep function for timing and GPIO for the Pi's pins
-from time import sleep
-import RPi.GPIO as GPIO
-# We also now are using the general time library for the timer function
-import time
-
-#Let's define variables so we can use them later
-Left_Forward_Pin = 35 #the internal Pi pin number that goes to snap 1
-Left_Backward_Pin = 31 #the internal Pi pin number that goes to snap 2
-Right_Forward_Pin = 26 #the internal Pi pin number that goes to snap 3
-Right_Backward_Pin = 21 #the internal Pi pin number that goes to snap 4
-Button_Pin = 18 #the internal Pi pin number that goes to snap 6
-
-#Setting up our pins
-GPIO.setmode(GPIO.BOARD)
-#Our output pins, start off
-GPIO.setup(Left_Forward_Pin, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(Left_Backward_Pin, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(Right_Forward_Pin, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(Right_Backward_Pin, GPIO.OUT, initial=GPIO.LOW)
-#Our input pin from the button
-GPIO.setup(Button_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-#Let's write some driving functions we can use later to program a pathdef drive_forward():
-def drive_forward(time):
-GPIO.output(Left_Forward_Pin, GPIO.HIGH) #Left motor forward
-GPIO.output(Right_Forward_Pin, GPIO.HIGH) #Right motor forward
-sleep(time)
-GPIO.output(Left_Forward_Pin, GPIO.LOW) #Left motor off
-GPIO.output(Right_Forward_Pin, GPIO.LOW) #Right motor off
-print('forward')
-sleep(1)
-def drive_left_turn(time):
-GPIO.output(Left_Backward_Pin, GPIO.HIGH) #Left motor backward
-GPIO.output(Right_Forward_Pin, GPIO.HIGH) #Right motor forward
-sleep(time)
-GPIO.output(Left_Backward_Pin, GPIO.LOW) #Left motor off
-GPIO.output(Right_Forward_Pin, GPIO.LOW) #Right motor off
-print('left turn')
-sleep(1)
-def drive_right_turn(time):
-GPIO.output(Left_Forward_Pin, GPIO.HIGH) #Left motor forward
-GPIO.output(Right_Backward_Pin, GPIO.HIGH) #Right motor backward
-sleep(time)
-GPIO.output(Left_Forward_Pin, GPIO.LOW) #Left motor off
-GPIO.output(Right_Backward_Pin, GPIO.LOW) #Right motor off
-print('right turn')
-sleep(1)
-def drive_backward(time):
-GPIO.output(Left_Backward_Pin, GPIO.HIGH) #Left motor backward
-GPIO.output(Right_Backward_Pin, GPIO.HIGH) #Right motor backward
-sleep(time)
-GPIO.output(Left_Backward_Pin, GPIO.LOW) #Left motor off
-GPIO.output(Right_Backward_Pin, GPIO.LOW) #Right motor off
-print('backward')
-sleep(1)
-
-# Here we are creating a timer function to record the duration of the button press
-def button_press_timer():
-Start_Time = time.time() #start the timer
-while GPIO.input(Button_Pin): #while the button is pressed...
-print("Button Pressed")
-return round(time.time() - Start_Time,2) #stop the timer, return elapsed time
-# For challenges 3 and 4, we will use a dummy variable to help with modulo operator
-count = 0
-# Replace the True with the modulo operator statement as %, which means remainder in division
-# So modulo 2 keeps track of odd and even presses since even divided by 2 has remainder of 0
-# To use this as a logical, let's try count % 2 == 0
-while True: #Looping over and over again
-sleep(0.25)
-# If the button is pressed, let's use the timer function to see how long
-if GPIO.input(Button_Pin):
-Button_Time = button_press_timer()
-print('Button pressed ' + str(Button_Time) + ' seconds')
-if True: # Try changing the True to the modulo for challenges 3 and 4
-#For challenges 1 and 2, try adding new driving functions here
-drive_forward(Button_Time)
-else: # To be used in challenges 3 and 4
-# Add other drive functions here for odd button presses
-count = count + 1 # We increment the counter for the next button press
+# Proyecto 5 
+# Aprender a programar, escribir funciones, usar salidas de control de motor, y agregar funciones de devolución de llamada
+# Construya el Proyecto 5 circuito y conducir el rover durante pulsaciones de botones, Simon Says estilo 
+# Mantenga presión en el botón para conducir durante ese tiempo 
+#Desafío 1 
+# Trate de cambiar los funciones de conducción para cambiar las direcciones de conducción 
+#Desafío 2 
+# Agregue nuevas funciones de manejo para activar en el bucle para crear una nueva ruta de conducción
+#Desafío 3 
+# Use el operador de módulo para cambiar las direcciones de conducción en función de las pulsaciones de números pares o impares. 
+#Desafío 4 
+# Con el módulo, agregue nuevas funciones de manejo para prensas pares o impares 
+#Importing libraries 
+# Aquí queremos la función sleep para el tiempo y GPIO para el pin de Pi from time import sleep 
+import RPi.GPIO as GPIO 
+# Ahora también estamos usando la tiempo general para la función de temporizador import time 
+#Definamos variables para poder usarlas más tarde 
+Left_Forward_Pin = 36 #el número de pin interno de Pi que se ajusta a 1 Left_Backward_Pin = 11 #el número de pin interno de Pi que se ajusta a 2 Right_Forward_Pin = 12 #el número de pin interno de Pi que se ajusta a 3 Right_Backward_Pin = 35 #el número de pin interno de Pi que se ajusta a 4 Button_Pin = 38 #el número de pin interno de Pi que se ajusta a 6 
+#Configurando nuestros pines
+GPIO.setmode(GPIO.BOARD) 
+#Nuestros pines de salida, empieza apagado 
+GPIO.setup(Left_Forward_Pin, GPIO.OUT, initial=GPIO.LOW) 
+GPIO.setup(Left_Backward_Pin, GPIO.OUT, initial=GPIO.LOW) 
+GPIO.setup(Right_Forward_Pin, GPIO.OUT, initial=GPIO.LOW) 
+GPIO.setup(Right_Backward_Pin, GPIO.OUT, initial=GPIO.LOW) 
+#Nuestro pin de entrada desde el botón 
+GPIO.setup(Button_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) 
+#Escribamos algunas funciones de conducción que podamos usar más tarde para programar un pathdef drive_forwa rd():
+Copyright © Deloitte Development LLC 2022. All Rights Reserved. Developed in collaboration with the National Math + Science Initiative. 
+def drive_forward(time):  
+ GPIO.output(Left_Forward_Pin, GPIO.HIGH) #Motor izquierda adelante GPIO.output(Right_Forward_Pin, GPIO.HIGH) #Motor derecho adelante  sleep(time) 
+ GPIO.output(Left_Forward_Pin, GPIO.LOW) #motor izquierdo apagado
+ GPIO.output(Right_Forward_Pin, GPIO.LOW) #motor derecho apagado 
+ print('forward') 
+ sleep(1) 
+def drive_left_turn(time): 
+ GPIO.output(Left_Backward_Pin, GPIO.HIGH) #Motor izquierdo hacia atrás  GPIO.output(Right_Forward_Pin, GPIO.HIGH) #Motor derecho adelante  sleep(time) 
+ GPIO.output(Left_Backward_Pin, GPIO.LOW) #motor izquierdo apagado 
+ GPIO.output(Right_Forward_Pin, GPIO.LOW) #motor derecho apagado
+ print('left turn') 
+ sleep(1) 
+  
+def drive_right_turn(time): 
+ GPIO.output(Left_Forward_Pin, GPIO.HIGH) #Motor izquierda adelante  GPIO.output(Right_Backward_Pin, GPIO.HIGH) #Motor derecho hacia atrás  sleep(time) 
+ GPIO.output(Left_Forward_Pin, GPIO.LOW) #motor izquierdo apagado 
+ GPIO.output(Right_Backward_Pin, GPIO.LOW) #motor derecho apagado 
+ print('right turn') 
+ sleep(1) 
+def drive_backward(time): 
+ GPIO.output(Left_Backward_Pin, GPIO.HIGH) #Motor izquierdo hacia atrás  GPIO.output(Right_Backward_Pin, GPIO.HIGH) #Motor derecho hacia atrás  sleep(time) 
+ GPIO.output(Left_Backward_Pin, GPIO.LOW) #motor izquierdo apagado 
+ GPIO.output(Right_Backward_Pin, GPIO.LOW) #motor derecho apagado 
+ print('backward') 
+ sleep(1) 
+# Aquí estamos creando una función de temporizador para registrar la duración de la pulsación del botón. def button_press_timer(): 
+ Start_Time = time.time() #Empiece el reloj 
+ while GPIO.input(Button_Pin): #mientras se presiona el botón...   print("Button Pressed") 
+ return round(time.time() - Start_Time,2) #para el temporizador, devolver el tiempo transcurrido 
+# Para desafíos 3 y 4, usaremos una variable ¨dummy¨ para ayudar con el operador de módulo count = 0 
+# Reemplace la True declaraciones con la sentencia del operador módulo cómo %, que significa resto en división 
+# Entonces, el módulo 2 realiza las pulsaciones pares e impares por dividiendo por 2 tiene un resto de 0 
+Copyright © Deloitte Development LLC 2022. All Rights Reserved. Developed in collaboration with the National Math + Science Initiative. 
+# Para usar esto como una lógica, intentemos count % 2 == 0 
+while True: #Bucle 
+ sleep(0.25) 
+  
+ # Si se presiona el botón, usamos la función de temporizador para ver cuánto tiempo  if GPIO.input(Button_Pin): 
+ Button_Time = button_press_timer() 
+ print('Button pressed ' + str(Button_Time) + ' seconds') 
+  
+ if count % 2 == 0: # Trate de cambiar las declaraciones True al módulo para desafíos 3 y 4 
+ #Para desafíos 1 y 2, trata a añadir nuevas funciones de conducción aquí  drive_forward(Button_Time) 
+  
+ else: # Para ser utilizado en desafíos 3 y 4 
+ drive_backward(Button_Time) 
+ # Agregue otras funciones de manejo aquí para presionar botones impares  
+ count = count + 1 # Incrementamos el contador para la siguiente pulsación de botón
