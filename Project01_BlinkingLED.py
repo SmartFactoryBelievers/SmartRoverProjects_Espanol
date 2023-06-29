@@ -1,32 +1,25 @@
-# Project 1
-# Learning to program and use outputs
-# Build the the Project 1 circuit and blink a LED
-
-# Challenge 1
-# Try changing the LED_On and LED_Off variables to change the blinking pattern
-
-#Challenge 2
-# Replace the color LED with buzzer or white LED to try other outputs
-
-#Importing libraries
-# Libraries are defined sets of code for specific uses
-# Here we want the sleep function for timing and GPIO for the Pi's pin from time import sleep
-import RPi.GPIO as GPIO
-
-# Let's define variables so we can use them later
-# Variables are words that take on values within the code
-# This way, we can edit the value at the beginning and the changes flow through
-LED_Pin = 7 #the internal Pi pin number that goes to snap 7
-
-#------------------------ CHALLENGE 1: CHANGE THE VALUES OF LED_ON AND LED_OFF ----------------------
-LED_On = .2 #duration of LED flash, seconds
-LED_Off = .1 #duration in between flashes, seconds
-
-#Setting up our pin
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(LED_Pin, GPIO.OUT, initial=GPIO.LOW) #Output pin, start off
-while True: #Looping over and over again
-sleep(LED_Off) #Keep LED off for defined duration
-GPIO.output(LED_Pin, GPIO.HIGH) #Turn lED on
-sleep(LED_On) #Keep LED on for defined duration
-GPIO.output(LED_Pin, GPIO.LOW) #Turn lED off
+# Proyecto 1
+# Aprendiendo a programar y usar salidas
+# Construye el Proyecto 1 circuito y parpadea un LED
+#Desafío 1 
+# Trata de cambiar las variables LED_On y LED_Off para cambiar el patrón
+#Desafío 2
+# Reemplace el LED de color con un timbre o un LED blanco para probar otras salidas 
+#Importing libraries 
+# Son conjuntos definidos de código para usos específicos
+# Aquí queremos la función sleep para el tiempo y GPIO para el pin de Pi from time import sleep 
+import RPi.GPIO as GPIO 
+#Definamos variables para poder usarlas más tarde
+# Las variables son palabras que toman valores dentro del código
+# De esta manera, podemos editar el valor al principio y los cambios fluirán por LED_Pin = 40 #el número de pin interno de Pi que se ajusta a 7 
+# Para el desafío 1, podemos probar diferentes valores aquí para parpadear en nuevos patrones 
+LED_On = 3 #duración de LED parpadea, segundos
+LED_Off = 1 #duración entre parpadeas, segundos
+#Configurando nuestro pin 
+GPIO.setmode(GPIO.BOARD) 
+GPIO.setup(LED_Pin, GPIO.OUT, initial=GPIO.LOW) #Pin de salida, empezar apagado
+while True: #Bucle
+ sleep(LED_Off) #Deja LED apagado por un duración definida 
+ GPIO.output(LED_Pin, GPIO.HIGH) #encender LED
+ sleep(LED_On) #Deja LED encendida por un duración definida 
+ GPIO.output(LED_Pin, GPIO.LOW) #LED apagado
