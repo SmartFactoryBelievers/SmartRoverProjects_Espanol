@@ -1,47 +1,34 @@
-# Project 2
-# Learning to program and using inputs and outputs
-# Build the the Project 2 circuit and control a LED with a button
-
-#Challenge 1
-# Try changing the LED_On and LED_Off variables to change the blinking pattern
-
-#Challenge 2
-# Replace the color LED with buzzer or white LED to try other outputs
-
-#Challege 3
-# Replace the push button with the phototransistor and cover it with your hand - what happens?
-
-#Challege 4
-# Try changing the "If" statement from True to False - now what does the button do?
-
-#Importing libraries
-# Here we want the sleep function for timing and GPIO for the Pi's pins
-from time import sleep
-import RPi.GPIO as GPIO
-
-#Let's define variables so we can use them later
-Button_Pin = 18 #the internal Pi pin number that goes to snap 6
-LED_Pin = 26 #the internal Pi pin number that goes to snap 3
-
-# For challenge 1, we can try different values here to blink in new patterns
-LED_On = 1 #duration of LED flash, seconds
-LED_Off = 1 #duration in between flashes, seconds
-
-#Setting up our pins
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(LED_Pin, GPIO.OUT, initial=GPIO.LOW) #Output pin, start off
-GPIO.setup(Button_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #Input pin, start open
-
-while True: #Looping over and over again
-# Here we use the If statement which evaluates a logical expression
-# It is checking if the button is pressed by reading tha value of the pin
-# If the button pin reads True (on), then it executes the indented code
-if GPIO.input(Button_Pin) == True: #When the button is pressed, blink LED
-sleep(LED_Off) #Keep LED off for defined duration
-GPIO.output(LED_Pin, GPIO.HIGH) #Turn LED on
-sleep(LED_On) #Keep LED on for defined duration
-GPIO.output(LED_Pin, GPIO.LOW) #Turn lED off
-# If the button is not pressed, the code will go to the else statement
-else:
-print('Button not pressed')
-sleep(1)
+# Proyecto 2 
+# Aprender a programar y utilizar entradas y salidas
+# Construya el Proyecto 2 circuito y controle un LED con un botón 
+#Desafío 1 
+# Trate de cambiar las variables LED_On y LED_Off para cambiar el patrón de parpadeo 
+#Desafío 2 
+# Reemplace el LED de color con un zumbador o un LED blanco para probar otras salidas 
+#Desafío 3 
+# Reemplace el botón pulsador con el fototransistor y cúbrelo con la mano - ¿qué sucede? 
+#Desafío 4 
+# Trate de cambiar el "If" declaración de True a False - ahora que hace el botón? 
+#Importing libraries 
+# Aquí queremos la función sleep para el tiempo y GPIO para el pin de Pi from time import sleep 
+import RPi.GPIO as GPIO 
+#Definamos variables para poder usarlas más tarde
+Button_Pin = 38 #el número de pin interno de Pi que se ajusta a 6 LED_Pin = 12 #el número de pin interno de Pi que se ajusta a 3
+# Para desafío 1, podemos probar diferentes valores aquí para parpadear en nuevos patrones LED_On = 3 #duración de ED parpadea, segundos
+LED_Off = 1 #duración entre parpadeas, segundos
+#Configurando nuestros pines 
+GPIO.setmode(GPIO.BOARD) 
+GPIO.setup(LED_Pin, GPIO.OUT, initial=GPIO.LOW) #pin de salida, apagado GPIO.setup(Button_Pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #pin de entrada, encendido
+while True: #Bucle
+  
+ # Aquí usamos el condicional If que evalúa una expresión lógica  # Verificar si se pulsa el botón y leyendo ese valor del pin  # Si el pin del botón dice True (on), se ejecuta ese código
+ if GPIO.input(Button_Pin) == False: #Cuando se presiona el botón, parpadea el LED
+  sleep(LED_Off) #Deja LED apagado por un duración definida 
+ GPIO.output(LED_Pin, GPIO.HIGH) #encender LED
+ sleep(LED_On) #deja LED encendido por duración definida
+ GPIO.output(LED_Pin, GPIO.LOW) #LED apagado
+ 
+ # Si no se presiona el botón, el código irá a la instrucción else  
+else: 
+ print('Button not pressed') 
+ sleep(1)
